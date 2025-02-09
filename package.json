@@ -1,0 +1,11 @@
+{
+    "name": "fundamental",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "concurrently \"cd backend && venv\\Scripts\\activate && uvicorn app:app --reload\" \"cd frontend && npm run dev\""
+    },
+    "devDependencies": {
+      "concurrently": "^8.0.0"
+    }
+  }
+  
