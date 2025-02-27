@@ -1,0 +1,323 @@
+/* Landing entire page content */
+.landing-content {
+    width: 100vw;
+    height: 100vh;
+
+    background-color: white;
+
+    margin-top: 80px;
+}
+
+/* Main */
+main {
+    width: 100%;
+    height: auto;
+
+    background-color: white;
+}
+
+
+/* Hero section (at the top) */
+.hero-section {
+    width: 100%;
+    height: 480px;
+
+    padding: 0 14%;
+
+    display: flex;
+    flex-direction: row;
+
+    background: linear-gradient(to bottom, #000000 0%, #1B1B1B 100%);
+}
+
+/* Text in the hero section */
+.hero-section .text-container {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+}
+.hero-section .text-container h1 {
+    height: 120px;
+
+    color: white;
+
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+
+    margin-bottom: 16px;
+}
+.hero-section .text-container h2 {
+    height: 80px;
+
+    margin-bottom: 32px;
+
+    color: white;
+    
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+}
+.hero-section .text-container h3 {
+    height: 20px;
+
+    margin-bottom: 24px;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Image in the hero section */
+.hero-section .image-container {
+    width: 50%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+}
+#phone-image {
+    width: 400px;
+    height: 400px;
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    gap: 24px;
+}
+/* Sign In Button */
+#signin-button {
+    width: 120px;
+    height: 40px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #00BE4C;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease-in-out;
+}
+#signin-button:hover {
+    background-color: #00A343; 
+}
+
+/* Login button */
+#login-button {
+    width: 120px;
+    height: 40px;
+
+    border: 2px solid #00BE4C;
+    border-radius: 10px;
+
+    background-color: transparent;
+    color: #00BE4C;
+
+    font-size: 16px;
+
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+#login-button:hover {
+    background-color: rgba(0, 190, 76, 0.2);
+}
+
+/* both buttons */
+#signin-button:active,
+#login-button:active {
+    background-color: #00BE4C;
+    color: white;
+    
+    border: none;
+}
+
+
+/* Overview section */
+.overview-section {
+    width: 100%;
+    height: 504px;
+
+    margin-top: 64px;
+    padding: 0 14%;
+
+    background-color: white;
+}
+/* Overview text description */
+.overview-section p {
+    font-size: 24px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+
+    color: #3F3F3F;
+}
+.overview-section span {
+    font-size: 24px;
+    font-weight: bold;
+
+    color: #3F3F3F;
+}
+
+/* Cards container */
+.cards-container {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 48px;
+}   
+
+
+/* Products section */
+.products-section {
+    width: 100%;
+    height: 320px;
+
+    margin-top: 96px;
+    padding: 0 14%;
+
+    gap: 48px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    background-color: white;
+}
+.products-section p {
+    width: 760px;
+    height: 80px;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+
+    color: #3F3F3F;
+}
+/* Image cards container */
+.img_cards-container {
+    width: 100%;
+    height: 120px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Showcase section */
+.showcase-section {
+    width: 100%;
+    height: 1000px;
+
+    padding: 0 14%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    color: #3F3F3F;
+
+    margin-top: 64px;
+}
+/* Showcase section title */
+.showcase-section h2 {
+    height: 40px;
+
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+.showcase-section p {
+    height: 40px;
+
+    font-size: 24px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+
+    margin-top: 8px;
+}
+
+
+/* Entire showcase boxes contianer */
+.boxes-container {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 64px;
+
+    gap: 48px;
+}
+
+/* Individual showcase boxes */
+.showcase-box {
+    width: 100%;
+    height: 240px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+/* Individual showcase box texts */
+.showcase-box .text-part {
+    width: 550px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.showcase-box .text-part h3 {
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+.showcase-box .text-part p {
+    height: 120px;
+
+    font-size: 20px;
+    font-weight: normal;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* Individual showcase box image */
+.showcase-box .image-part {
+    width: calc(100% - 550px);
+
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+}
+.showcase-box .image-part#left {
+    justify-content: flex-start;
+}
+

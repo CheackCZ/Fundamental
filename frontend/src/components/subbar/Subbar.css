@@ -1,0 +1,34 @@
+/* Entire subbar content */
+.subbar-content {
+    width: 100%;
+    height: 80px;
+
+    background-color: #F0F0F0;
+
+    padding: 0 14%;
+}
+
+/* Subbar container */
+.subbar-container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-start;
+    align-items: center;
+}
+.subbar-container ul {
+    gap: 32px;
+}
+.subbar-container a {
+    cursor: pointer;
+
+    color: #3F3F3F;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+.subbar-container a:hover {
+    color: #161616;
+}

@@ -1,0 +1,32 @@
+/* Entire card styles */
+.info-card {
+    width: 265px;
+    height: 320px;
+
+    background-color: #00BE4C66;
+
+    border: none;
+    border-radius: 20px;
+}
+/* Card content styles */
+.card-header {
+    display: flex;
+
+    flex-direction: column;
+    
+    align-items: start;
+}
+.card-icon {
+    width: auto;
+    height: 31px;
+
+    margin-bottom: 16px;
+}
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.card-content {
+    font-size: 16px;
+    font-weight: normal;
+}
