@@ -14,7 +14,11 @@ import advancedAnalyticsIcon from '@/assets/icons/advanced_analytics.svg';
 import webBasedIcon from '@/assets/icons/web-based.svg';
 import affordableIcon from '@/assets/icons/affordable.svg';
 
+import { useNavigate } from 'react-router-dom';
+
 function Landing() {
+    const navigate = useNavigate();
+
 
     return (
         <div className='landing-content'>
@@ -39,8 +43,8 @@ function Landing() {
 
                         {/* Buttons */}
                         <div className='button-container'>
-                            <Button id='signin-button'>Sign In</Button>
-                            <Button id='login-button'>Login</Button>
+                            <Button id='signin-button' onClick={() => navigate('/signin')}>Sign In</Button>
+                            <Button id='login-button' onClick={() => navigate('/login')}>Login</Button>
                         </div>
                     </div>    
 

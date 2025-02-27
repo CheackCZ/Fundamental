@@ -10,7 +10,10 @@ import './Navbar.css';
 
 import logoDark from '@/assets/img/Logo-dark.png';
 
+import { useNavigate } from 'react-router-dom';
+
 function Navbar() {
+    const navigate = useNavigate();
 
     return (
         
@@ -18,7 +21,7 @@ function Navbar() {
             
             {/* div with application Logo */}
             <div className="logo-container">
-                <img src={logoDark} alt="logo-white" />
+                <img src={logoDark} alt="logo-dark" />
             </div>
             
             {/* div with navigation links */}
@@ -36,7 +39,7 @@ function Navbar() {
                             <NavigationMenuLink>Support</NavigationMenuLink>
                         </NavigationMenuItem>
 
-                        <Button>Sign In</Button>
+                        <Button  onClick={() => navigate('/signin')}>Sign In</Button>
                     
                     </NavigationMenuList>
 
