@@ -4,21 +4,22 @@ import {
     NavigationMenuLink, 
     NavigationMenuList, 
 } from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
 
-import './Navbar.css';
+import Dropdown from "@/components/dropdown/Dropdown";
 
 import logoDark from '@/assets/img/logo/Logo-dark.png';
+import SearchIcon from "@/assets/icons/search.svg";
 
-import { useNavigate } from 'react-router-dom';
+interface LoggedInNavbarProps {
+    toggleCommand: () => void;
+}
 
-function Navbar() {
-    const navigate = useNavigate();
+function LoggedInNavbar({ toggleCommand }: LoggedInNavbarProps) {
 
     return (
-        
+
         <div className="navbar-content">
-            
+
             {/* div with application Logo */}
             <div className="logo-container">
                 <img src={logoDark} alt="logo-dark" />
@@ -32,14 +33,24 @@ function Navbar() {
                     <NavigationMenuList>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Products</NavigationMenuLink>
+                            <NavigationMenuLink>Dashboard</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Support</NavigationMenuLink>
+                            <NavigationMenuLink>Markets</NavigationMenuLink>
                         </NavigationMenuItem>
 
-                        <Button  onClick={() => navigate('/signin')}>Sign In</Button>
+                        <NavigationMenuItem>
+                            <NavigationMenuLink>News</NavigationMenuLink>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <img src={SearchIcon} alt="search-icon" className="w-[20px] h-[20px] cursor-pointer" onClick={toggleCommand} />
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <Dropdown />
+                        </NavigationMenuItem>
                     
                     </NavigationMenuList>
 
@@ -52,4 +63,4 @@ function Navbar() {
 
 }
 
-export default Navbar;
+export default LoggedInNavbar;

@@ -1,4 +1,4 @@
-/* Landing entire page content */
+/* Landing entire page styling */
 .landing-content {
     width: 100vw;
     height: 100vh;
@@ -29,8 +29,7 @@ main {
 
     background: linear-gradient(to bottom, #000000 0%, #1B1B1B 100%);
 }
-
-/* Text in the hero section */
+/* Texts in the hero section */
 .hero-section .text-container {
     width: 50%;
     height: 100%;
@@ -239,6 +238,7 @@ main {
     color: #3F3F3F;
 
     margin-top: 64px;
+    margin-bottom: 64px;
 }
 /* Showcase section title */
 .showcase-section h2 {
@@ -259,7 +259,7 @@ main {
 }
 
 
-/* Entire showcase boxes contianer */
+/* Entire showcase boxes container */
 .boxes-container {
     width: 100%;
     height: auto;
@@ -320,4 +320,3 @@ main {
 .showcase-box .image-part#left {
     justify-content: flex-start;
 }
-

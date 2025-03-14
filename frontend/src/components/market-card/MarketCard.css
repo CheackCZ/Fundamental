@@ -1,0 +1,38 @@
+/* Entire card design */
+.market-card {
+    width: fit-content;
+    height: 50px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: #D9D9D9;
+
+    padding: 10px 16px;
+    
+    border-radius: 8px;
+    
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    
+    text-decoration: none;
+    
+    transition: background-color 0.2s ease-in-out;
+}
+.market-card:hover {
+    background-color: #d4d4d4;
+}
+
+/* Icon */
+.market-icon {
+    width: 24px;
+    height: 24px;
+}
+/* Market name */
+.market-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    
+    color: #333;
+}

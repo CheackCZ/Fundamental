@@ -1,0 +1,64 @@
+/* Entire card styling */
+.news-card {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 30px 20px;
+
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* CardHeader styling */
+.news-card-header {
+    height: auto;
+    width: 100%;
+
+    padding: 0;
+}
+.news-card-header > img {
+    width: 320px;
+    height: 195px;
+
+    margin-bottom: 10px;
+}
+.news-card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+
+    line-height: 1.2;
+}
+
+/* CardContent styling */
+.news-card-content {
+    height: max-content;
+    width: 100%;
+
+    padding: 0;
+}
+.news-card-description {
+    height: 140px;
+
+    margin-top: 8px;
+
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+/* CardFooter styling */
+.news-card-footer {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 0;
+}

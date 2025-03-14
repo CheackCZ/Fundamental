@@ -5,23 +5,24 @@ import './Footer.css'
 function Footer () {
 
     return (
+
         <div className="footer-container">
 
-            <div className="info-container">
+            <div className="footer-info-container">
                 
                 {/* Container with Contacts */}
-                <div className="contact-container">
+                <div className="footer-contact-container">
                     <h3>CONTACT</h3>
                     
                     {/* Contact information */}
-                    <div className="contact-info">
+                    <div className="footer-contact-info">
 
-                        <div className='contact-titles'>
+                        <div className='footer-contact-titles'>
                             <p>Email: </p>
                             <p>Social media: </p>
                         </div>
 
-                        <div className="contact-values">
+                        <div className="footer-contact-values">
                             <a href="mailto: fundamental@ondrejfaltin.cz" target="_blank">fundamental@ondrejfaltin.cz</a>
                         
                             <ul>
@@ -32,15 +33,14 @@ function Footer () {
                             
                     </div>
                     
-
                 </div>
 
                 {/* Container with Support */}
-                <div className="support-container">
+                <div className="footer-support-container">
                     <h3>SUPPORT</h3>
 
                     {/* Support information */}
-                    <div className="support-info">
+                    <div className="footer-support-info">
                         <p><a href="https://github.com/CheackCZ" target="_blank">GitHub</a></p>
                         <p><a href="https://github.com/CheackCZ/Fundamental/blob/main/README.md" target="_blank">Documentation</a></p>
                     </div>
@@ -50,7 +50,7 @@ function Footer () {
             </div>
             
             {/* Copyright container  */}
-            <div className="copyright-container">
+            <div className="footer-copyright-container">
 
                 <Separator style={{ backgroundColor: "#1B1B1B" }}/>
                     <p>© 2025 Fundamental. All rights reserved.</p>

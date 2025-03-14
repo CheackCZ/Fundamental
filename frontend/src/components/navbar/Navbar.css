@@ -76,7 +76,7 @@
     color: #00BE4C;
 }
 .navbar-container a:active {
-    background-color: #00BE4C;
+    /*background-color: #00BE4C;*/
     color: white;
     
     border: none;

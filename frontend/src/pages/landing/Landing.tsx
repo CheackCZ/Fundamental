@@ -1,12 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';
+
 import Navbar from '@/components/navbar/Navbar';
 import Subbar from '@/components/subbar/Subbar';
 import InfoCard from '@/components/info-card/InfoCard';
 import ImageCard from '@/components/img-card/ImageCard';
 import Footer from '@/components/footer/Footer';
-
-import { Button } from '@/components/ui/button';
-
-import './Landing.css';
 
 import phoneImage from '@/assets/img/phone.png';
 import worldWideCoverageIcon from '@/assets/icons/world-wide_coverage.svg';
@@ -14,19 +14,21 @@ import advancedAnalyticsIcon from '@/assets/icons/advanced_analytics.svg';
 import webBasedIcon from '@/assets/icons/web-based.svg';
 import affordableIcon from '@/assets/icons/affordable.svg';
 
-import { useNavigate } from 'react-router-dom';
+import './Landing.css';
+
 
 function Landing() {
     const navigate = useNavigate();
-
 
     return (
         <div className='landing-content'>
 
             {/* Header */}
             <header>
+
                 {/* Navbar component */}
                 <Navbar />
+
             </header>
 
             {/* Main */}
@@ -103,19 +105,19 @@ function Landing() {
                     
                     <div className='img_cards-container'>
                         <ImageCard 
-                            title="Research" 
-                            image="" 
-                        />
-                        <ImageCard 
-                            title="Analysis" 
-                            image="" 
-                        />
-                        <ImageCard 
                             title="Markets" 
                             image="" 
                         />
                         <ImageCard 
                             title="News" 
+                            image="" 
+                        />
+                        <ImageCard 
+                            title="Macrocalendar" 
+                            image="" 
+                        />
+                        <ImageCard 
+                            title="Analysis" 
                             image="" 
                         />
                     </div>

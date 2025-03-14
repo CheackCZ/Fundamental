@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
     Card,
     CardContent,
@@ -23,11 +24,13 @@ const InfoCard: React.FC<InfoCardProps> = ({ image, title, content }) => {
 
         <Card className="info-card">
         
+            {/* Card Header */}
             <CardHeader className="card-header">
-                <img src={image} alt={title} className="card-icon" />
+                <img src={image} alt={title}/>
                 <CardTitle className="card-title">{title}</CardTitle>
             </CardHeader>
         
+            {/* Card Content */}
             <CardContent>
                 <CardDescription className="card-content">{content}</CardDescription>
             </CardContent>

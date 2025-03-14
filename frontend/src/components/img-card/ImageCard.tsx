@@ -13,10 +13,10 @@ const ImageCard: React.FC<ImageCardProps> = ({ title, image , width = 265, heigh
     
     return (
     
-    <Card className="image-card" style={{ width, height }}>
+        <Card className="image-card" style={{ width, height }} onClick={() => (window.location.href = "https://example.com")}>
 
             {/* Image container */}
-            <div className="image-container" style={{ backgroundImage: `url(${image})` }}>
+            <div className="photo-container" style={{ backgroundImage: `url(${image})` }}>
                 <p className="card-text">{title}</p>
             </div>
         
