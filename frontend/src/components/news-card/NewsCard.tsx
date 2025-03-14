@@ -2,50 +2,68 @@ import React from "react";
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
     CardFooter,
-} from "@/components/ui/card"
-
-import './NewsCard.css';
+} from "@/components/ui/card";
+import "./NewsCard.css";
 
 interface NewsCardProps {
     image: string;
     title: string;
     content: string;
     newsReference: string;
+    variant?: "default" | "compact" | "detailed";
     width?: string;
     height?: string;
 }
 
-
-const NewsCard: React.FC<NewsCardProps> = ({ image, title, content, newsReference, width = "360px", height = "480px" }) => {
-
+const NewsCard: React.FC<NewsCardProps> = ({
+    image,
+    title,
+    content,
+    newsReference,
+    variant = "default",
+    width,
+    height,
+}) => {
     return (
         
-        <Card className="news-card" style={{ width, height }}>
+        <Card
+            className={`news-card ${variant === "detailed" ? "latest-news" : variant === "compact" ? "news-item" : "news-card-default"}`}
+            style={{ width, height }}
+        >
         
             {/* Card Header */}
-            <CardHeader className="news-card-header">
-                <img src={image} alt={title} className="news-card-img" />
-                <CardTitle className="news-card-title">{title}</CardTitle>
-            </CardHeader>
-        
-            {/* Card Content */}
-            <CardContent className="news-card-content">
-                <CardDescription className="news-card-description">{content}</CardDescription>
-            </CardContent>
-
-            {/* Card Footer */}
-            <CardFooter className="news-card-footer">
-                <a href={newsReference}>More</a>
-            </CardFooter>
+            {variant === "compact" ? (
+                <>
+                    <img src={image} alt={title} className="news-item-img" />
+                    <div className="news-item-texts">
+                        <CardTitle className="news-item-title">{title}</CardTitle>
+                        <p className="news-item-text">{content}</p>
+                        <a href={newsReference}>More &gt;</a>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <CardHeader className="news-card-header">
+                        <img src={image} alt={title} className="news-card-img" />
+                        <CardTitle className="news-card-title">{title}</CardTitle>
+                    </CardHeader>
+                  
+                    <CardContent className="news-card-content">
+                        <p className="news-card-description">{content}</p>
+                    </CardContent>
+                  
+                    <CardFooter className="news-card-footer">
+                        <a href={newsReference}>More &gt;</a>
+                    </CardFooter>
+                </>
+            )}
 
         </Card>
     
-);
-
-}
+    );
+};
 
 export default NewsCard;

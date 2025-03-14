@@ -1,14 +1,15 @@
 /* Entire card styling */
 .news-card {
     display: flex;
+
     flex-direction: column;
-
     justify-content: flex-start;
+    
     align-items: center;
-
     padding: 30px 20px;
-
+    
     border: none;
+    
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -16,40 +17,53 @@
 .news-card-header {
     height: auto;
     width: 100%;
-
+    
     padding: 0;
 }
 .news-card-header > img {
-    width: 320px;
-    height: 195px;
-
+    width: 100%;
+    height: auto;
+    
     margin-bottom: 10px;
 }
 .news-card-title {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
+    
     font-size: 20px;
-
+    
     line-height: 1.2;
+    
+    margin-bottom: 10px;
 }
 
 /* CardContent styling */
 .news-card-content {
     height: max-content;
     width: 100%;
-
+ 
     padding: 0;
 }
 .news-card-description {
-    height: 140px;
-
+    height: auto;
+    max-height: 80px;
+    overflow: hidden;
+ 
     margin-top: 8px;
-
+ 
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
     font-size: 16px;
-
+ 
     line-height: 1.6;
+}
+/* Default variant specific styling */
+.news-card-default .news-card-description {
+    max-height: 152px;
+
+    margin-bottom: 10px;
+
+    overflow: hidden;
 }
 
 /* CardFooter styling */
@@ -59,6 +73,68 @@
 
     display: flex;
     justify-content: flex-end;
-
+    
     padding: 0;
+}
+
+/* COMPACT VARIANT (news-item) */
+.news-item {
+    width: 100%;
+    height: 153px;
+    
+    padding: 10px;
+    
+    display: flex;
+    flex-direction: row;
+    
+    gap: 10px;
+    
+    justify-content: flex-start;
+    align-items: center;
+    
+    border-radius: 0;
+
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.news-item-img {
+    width: 120px;
+    height: 100%;
+    
+    object-fit: cover;
+}
+
+.news-item-texts {
+    width: calc(100% - 120px);
+    height: 100%;
+}
+
+.news-item-title {
+    width: 100%;
+    height: fit-content;
+    
+    max-height: 48px;
+    
+    overflow: hidden;
+    
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+
+    padding-bottom: 8px;
+}
+.news-item-texts p {
+    width: 100%;
+    height: 72px;
+    
+    font-size: 12px;
+    
+    overflow: hidden;
+    
+    margin: 0;
+}
+.news-item-texts a {
+    color: #0073e6;
+    font-size: 12px;
 }

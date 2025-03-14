@@ -133,27 +133,35 @@ function Dashboard() {
                     {/* Container with individual news preview */}
                     <div className="news-boxes-container">
                         <NewsCard 
-                            image="https://via.placeholder.com/360x200" 
-                            title="Breaking News" 
-                            content="This is a summary of the latest news happening around the world."
-                            newsReference="https://example.com/news"
+                            image="/src/assets/img/previews/preview-test.png"
+                            title="Wall Street's 2025 stock market forecasts are falling..."
+                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
+                            newsReference="https://example.com/article"
+                            variant="default" 
+                            width="100%" 
+                            height="480px"
                         />
 
                         <NewsCard 
-                            image="https://via.placeholder.com/360x200" 
-                            title="Breaking News" 
-                            content="This is a summary of the latest news happening around the world."
-                            newsReference="https://example.com/news"
-                            width="420px"
-                            height="560px"
+                            image="/src/assets/img/previews/preview-test.png"
+                            title="Wall Street's 2025 stock market forecasts are falling..."
+                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
+                            newsReference="https://example.com/article"
+                            variant="default" 
+                            width="100%" 
+                            height="520px"
                         />
 
                         <NewsCard 
-                            image="https://via.placeholder.com/360x200" 
-                            title="Breaking News" 
-                            content="This is a summary of the latest news happening around the world."
-                            newsReference="https://example.com/news"
+                            image="/src/assets/img/previews/preview-test.png"
+                            title="Wall Street's 2025 stock market forecasts are falling..."
+                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
+                            newsReference="https://example.com/article"
+                            variant="default" 
+                            width="100%" 
+                            height="480px"
                         />
+
                     </div>
                     
                 </section>
