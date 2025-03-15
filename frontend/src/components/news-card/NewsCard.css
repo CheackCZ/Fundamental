@@ -1,87 +1,113 @@
-/* Entire card styling */
+/* ============================= */
+/* GLOBAL STYLING (Applies to All Variants) */
+/* ============================= */
 .news-card {
     display: flex;
-
     flex-direction: column;
+
     justify-content: flex-start;
-    
     align-items: center;
+
     padding: 30px 20px;
-    
+
     border: none;
-    
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* CardHeader styling */
+/* Card Header */
 .news-card-header {
     height: auto;
     width: 100%;
-    
+
     padding: 0;
-}
-.news-card-header > img {
-    width: 100%;
-    height: auto;
-    
-    margin-bottom: 10px;
 }
 .news-card-title {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    
     font-size: 20px;
-    
+
     line-height: 1.2;
     
     margin-bottom: 10px;
 }
 
-/* CardContent styling */
+/* Card Content */
 .news-card-content {
     height: max-content;
     width: 100%;
- 
+
     padding: 0;
 }
 .news-card-description {
     height: auto;
     max-height: 80px;
+    
     overflow: hidden;
- 
+    
     margin-top: 8px;
- 
+    
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
     font-size: 16px;
- 
+    
     line-height: 1.6;
 }
-/* Default variant specific styling */
-.news-card-default .news-card-description {
-    max-height: 152px;
 
-    margin-bottom: 10px;
-
-    overflow: hidden;
-}
-
-/* CardFooter styling */
+/* Card Footer */
 .news-card-footer {
     height: auto;
     width: 100%;
 
     display: flex;
+    
     justify-content: flex-end;
     
-    padding: 0;
+    margin-top: auto;
+    padding: 10px 0 0 0;
+}
+.news-card-footer a {
+    text-decoration: none;
+
+    color: #0073e6;
+    
+    font-weight: bold;
 }
 
-/* COMPACT VARIANT (news-item) */
+/* ============================= */
+/* DEFAULT VARIANT STYLING */
+/* ============================= */
+.news-card-default .news-card-header > img {
+    width: 100%;
+    
+    height: auto;
+    max-height: 164px;
+
+    object-fit: cover;
+}
+.news-card-default .news-card-description {
+    max-height: 152px;
+    
+    margin-bottom: 10px;
+    
+    overflow: hidden;
+}
+.news-card-default .news-card-footer {
+    display: flex;
+
+    justify-content: flex-end; 
+    align-items: flex-end;
+    
+    margin-top: auto;
+    padding: 10px 0;
+}
+
+/* ============================= */
+/* COMPACT VARIANT STYLING (news-item) */
+/* ============================= */
 .news-item {
     width: 100%;
     height: 153px;
-    
+
     padding: 10px;
     
     display: flex;
@@ -93,27 +119,28 @@
     align-items: center;
     
     border-radius: 0;
-
+    
     background-color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 .news-item-img {
     width: 120px;
     height: 100%;
     
     object-fit: cover;
 }
-
 .news-item-texts {
     width: calc(100% - 120px);
     height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
 }
-
 .news-item-title {
     width: 100%;
     height: fit-content;
-    
     max-height: 48px;
     
     overflow: hidden;
@@ -121,13 +148,13 @@
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 16px;
-
+    
     padding-bottom: 8px;
 }
 .news-item-texts p {
     width: 100%;
     height: 72px;
-    
+
     font-size: 12px;
     
     overflow: hidden;
@@ -136,5 +163,31 @@
 }
 .news-item-texts a {
     color: #0073e6;
+    
     font-size: 12px;
+    
+    align-self: flex-start; 
+    
+    margin-top: auto;
+}
+
+/* ============================= */
+/* DETAILED VARIANT STYLING (latest-news) */
+/* ============================= */
+.latest-news .news-card-header > img {
+    width: 100%;
+
+    height: auto;
+    max-height: 248px;
+    
+    object-fit: contain;
+}
+.latest-news .news-card-footer {
+    display: flex;
+    
+    justify-content: flex-end;
+    align-items: flex-end;
+    
+    margin-top: auto;
+    padding: 10px 0 0 0;
 }

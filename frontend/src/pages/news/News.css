@@ -38,6 +38,8 @@
 }
 .section-title#latest-title {
     font-size: 32px;
+
+    cursor: auto;
 }
 
 /* Container grid with the news boxes */

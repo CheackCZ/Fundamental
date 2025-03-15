@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Markets from "./pages/markets/Markets";
 import News from "./pages/news/News";
+import NewsSection from "./pages/news/news-section/NewsSection";
 import Sentiment from "./pages/sentiment/Sentiment";
 import Macrocalendar from "./pages/macrocalendar/Macrocalendar";
 
@@ -34,6 +35,9 @@ function App() {
 
                 {/* Route to News */}
                 <Route path="/news" element={<News />}></Route>
+
+                {/* Dynamic News Section Route */}
+                <Route path="/news/:sectionName" element={<NewsSection />} />
 
                 {/* Route to inidividual news */}
 

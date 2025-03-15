@@ -1,0 +1,22 @@
+/* Entire page styling */
+.news-section-content {
+    width: 100vw;
+    height: auto;
+
+    margin-top: 80px;
+}
+
+/* Page container styling */
+.news-section-container {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 48px;
+
+    padding: 0 14%;
+    margin-top: 144px;
+    margin-bottom: 48px;
+}

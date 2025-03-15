@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; 
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
 import NewsCard from "@/components/news-card/NewsCard";
@@ -9,7 +10,7 @@ import Command from "@/components/command/Command";
 
 import './News.css';
 
-function Markets () {
+function News () {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
 
     const toggleCommand = () => {
@@ -100,11 +101,13 @@ function Markets () {
                     {/* Stock market News Section */}
                     <div className="news-page-section" id="stock-market-section">
 
-                        <a className="section-title" id="stock-market-title">Stock Market News &gt;</a>
+                        <Link to="/news/stock-market-news" className="section-title" id="stock-market-title">
+                            Stock Market News &gt;
+                        </Link>
 
                         <div className="section-container">
                             
-                            <NewsCard 
+                                <NewsCard 
                                     image="/src/assets/img/previews/preview-test.png"
                                     title="Wall Street's 2025 stock market forecasts are falling..."
                                     content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
@@ -151,8 +154,9 @@ function Markets () {
                     {/* Economic News Section */}
                     <div className="news-page-section" id="economic-market-section">
                         
-                        <a className="section-title" id="economic-market-title">Economic News &gt;</a>
-
+                        <Link to="/news/economic-news" className="section-title" id="stock-market-title">
+                            Economic News &gt;
+                        </Link>
                         <div className="section-container">
                             
                             <NewsCard 
@@ -202,7 +206,7 @@ function Markets () {
                     {/* All News Section */}
                     <div className="news-page-section" id="all-section">
                         
-                        <a className="section-title" id="all-title">All News</a>
+                        <h1 className="section-title" id="stock-market-title">All News</h1>
 
                         <div className="section-container">
                             
@@ -283,4 +287,4 @@ function Markets () {
     
 }
 
-export default Markets;
+export default News;
