@@ -4,8 +4,10 @@ import Landing from "./pages/landing/Landing";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Markets from "./pages/markets/Markets";
+import Stock from "./pages/stock/Stock";
 import News from "./pages/news/News";
 import NewsSection from "./pages/news/news-section/NewsSection";
+import Article from './pages/news/article/Article';
 import Sentiment from "./pages/sentiment/Sentiment";
 import Macrocalendar from "./pages/macrocalendar/Macrocalendar";
 
@@ -29,9 +31,8 @@ function App() {
                 {/* Route to Markets */}
                 <Route path="/markets" element={<Markets />}></Route>
 
-                {/* Route to Individual Market */}
-
-                {/* Route to Individual stock */}
+                {/* Route to Individual stock / etf */}
+                <Route path="/stock/:ticker" element={<Stock />} />
 
                 {/* Route to News */}
                 <Route path="/news" element={<News />}></Route>
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/news/:sectionName" element={<NewsSection />} />
 
                 {/* Route to inidividual news */}
+                <Route path="/news/article/:newsId" element={<Article />} />
 
                 {/* Route to Macrocalendar */}
                 <Route path="/macrocalendar" element={<Macrocalendar />}></Route>

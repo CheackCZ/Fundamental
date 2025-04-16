@@ -14,20 +14,20 @@ function News () {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
 
     const toggleCommand = () => {
-            setIsCommandOpen((prev) => !prev);
+        setIsCommandOpen((prev) => !prev);
+    };
+    
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.ctrlKey && event.key === "j") {
+                event.preventDefault();
+                toggleCommand();
+            }
         };
-    
-        useEffect(() => {
-            const handleKeyDown = (event: KeyboardEvent) => {
-                if (event.ctrlKey && event.key === "j") {
-                    event.preventDefault();
-                    toggleCommand();
-                }
-            };
-    
-            document.addEventListener("keydown", handleKeyDown);
-            return () => document.removeEventListener("keydown", handleKeyDown);
-        }, []);
+
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
     
 
     return (

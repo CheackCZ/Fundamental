@@ -1,0 +1,10 @@
+/* Entire page design */
+.markets-content {
+    width: 100vw;
+    height: 100vh;
+    
+    background-color: white;
+
+    margin-top: 80px;
+}
+

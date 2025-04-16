@@ -1,0 +1,88 @@
+/* Entire page styling */
+.article-content {
+    width: 100vw;
+    height: auto;
+
+    margin-top: 80px;
+}
+
+/* Given article styling */
+.article-container {
+    display: grid;
+    
+    grid-template-columns: 2fr 1fr; 
+    grid-template-areas:
+        "article related-news";
+    
+    gap: 48px;
+    
+    padding: 0 14%;
+    padding-top: 64px;
+    
+    margin-bottom: 48px;
+    
+    height: auto;
+    width: 100%;
+}
+
+/* Article content styling */
+.article-main-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 32px;
+}
+
+.article-preview-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    color: #3F3F3F;
+}
+.article-preview-container h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+}
+.article-preview-container img {
+    width: 100%;
+    height: auto;
+}
+
+
+.sources-container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article-text-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 16px;
+}
+
+
+.related-news-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    gap: 16px;
+}
+
+.related-news-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+
+    color: #3F3F3F;
+}

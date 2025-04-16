@@ -1,0 +1,142 @@
+/* Entire page styling */
+.stock-content {
+    height: auto;
+    width: 100vw;
+
+    background-color: white;
+
+    margin-top: 80px;
+}
+
+/* main styling */
+.stock-main {
+    padding: 0 14%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 144px;
+
+    gap: 32px;
+}
+
+/* Stock container styling */
+.stock-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+.stock-logo {
+    width: 36px;
+    height: 40px;
+
+    margin-right: 16px;
+}
+.stock-legend {
+    display: flex;
+    flex-direction: row;
+}
+.stock-texts {
+    width: 50%;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    align-items: baseline;
+
+    gap: 16px;
+}
+.ticker {
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+.stock-name {
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+
+    color: gray;
+}
+
+.price-container {
+    width: 50%;
+
+    text-align: end;
+}
+.price {
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+}
+
+/* Stock info container styling */
+.stock-info-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+h3 {
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+}
+
+/* Stock data styling */
+.stock-multiples {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+.stock-valuations {
+    display: flex;
+    flex-direction: row;
+}
+.company-data {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+.value-data {
+    display: flex;
+    flex-direction: row;
+}
+.value-data > p {
+    width: 120px;
+    font-weight: bold;
+}
+.stock-data {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    
+    gap: 8px;
+}
+
+/* Stock financials styling */
+.stock-financials {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+/* Stock related news styling */
+.stock-related-news {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 48px;
+
+    gap: 8px;
+}
