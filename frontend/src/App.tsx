@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Markets from "./pages/markets/Markets";
+import Stocks from "./pages/stocks/Stocks";
 import Stock from "./pages/stock/Stock";
 import News from "./pages/news/News";
 import NewsSection from "./pages/news/news-section/NewsSection";
@@ -29,7 +29,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />}></Route>
 
                 {/* Route to Markets */}
-                <Route path="/markets" element={<Markets />}></Route>
+                <Route path="/stocks" element={<Stocks />}></Route>
 
                 {/* Route to Individual stock / etf */}
                 <Route path="/stock/:ticker" element={<Stock />} />

@@ -95,14 +95,15 @@ const Stock = () => {
                                 <span>$391.4M</span>
                             </div>
 
-                        </div>
-
-                        <div className="stock-data">
                             <div className="value-data">
                                 <p>P/E: </p>
                                 <span>20.42</span>
                             </div>
 
+                        </div>
+
+                        <div className="stock-data">
+                            
                             <div className="value-data">
                                 <p>EPS: </p>
                                 <span>$22.12</span>
