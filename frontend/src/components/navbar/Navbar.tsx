@@ -32,14 +32,14 @@ function Navbar() {
                     <NavigationMenuList>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Products</NavigationMenuLink>
+                            <NavigationMenuLink href="/#subbar-section">Products</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Support</NavigationMenuLink>
+                            <NavigationMenuLink href="/#footer">Support</NavigationMenuLink>
                         </NavigationMenuItem>
 
-                        <Button  onClick={() => navigate('/signin')}>Sign In</Button>
+                        <Button id='signin-button' onClick={() => navigate('/login?tab=signin')}>Sign In</Button>
                     
                     </NavigationMenuList>
 

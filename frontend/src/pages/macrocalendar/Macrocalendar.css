@@ -1,0 +1,36 @@
+/* Entire page styling */
+.macrocalendar-content {
+    height: auto;
+    width: 100vw;
+
+    background-color: white;
+
+    margin-top: 80px;
+}
+
+.macrocalendar-main {
+    width: 100%;
+
+    padding: 0 14%;
+    margin-top: 144px;
+
+    display: flex;
+    flex-direction: row;
+    
+    gap: 32px;
+    
+    align-items: flex-start;
+}
+
+.calendar-section {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 8px;
+}
+
+.macro-table-section {
+    width: 100%;
+
+    margin-bottom: 48px;
+}

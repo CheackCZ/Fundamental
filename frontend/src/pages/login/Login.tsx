@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { AuthForm } from "@/components/auth-form/AuthForm"; 
+import { useLocation } from "react-router-dom";
 
 import {
     Tabs,
@@ -13,6 +15,14 @@ import './Login.css';
 
 
 function Login() {
+    const location = useLocation();
+    const [tab, setTab] = useState("login");
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const tabParam = params.get("tab");
+        if (tabParam === "signin") setTab("signin");
+    }, [location.search]);
 
     return (
 
@@ -27,7 +37,7 @@ function Login() {
             {/* Form container */}
             <div className="form-container">
 
-                <Tabs defaultValue="login" className="w-[400px]">
+                <Tabs value={tab} onValueChange={setTab} className="w-[400px]">
                     
                     {/* Tabs */}
                     <TabsList className="grid w-full grid-cols-2 bg-[#27272A]">

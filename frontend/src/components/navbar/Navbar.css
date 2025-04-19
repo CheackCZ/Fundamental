@@ -81,3 +81,8 @@
     
     border: none;
 }
+
+/* Subbar Section styling */
+#subbar-section {
+    scroll-margin-top: 80px;
+}

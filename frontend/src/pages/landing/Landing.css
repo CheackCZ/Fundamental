@@ -320,3 +320,8 @@ main {
 .showcase-box .image-part#left {
     justify-content: flex-start;
 }
+
+/* Correct link landings styling */
+#overview-section, #products-section, #showcase-section {
+    scroll-margin-top: 100px;
+}

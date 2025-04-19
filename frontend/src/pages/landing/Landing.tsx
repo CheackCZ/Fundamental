@@ -45,8 +45,8 @@ function Landing() {
 
                         {/* Buttons */}
                         <div className='button-container'>
-                            <Button id='signin-button' onClick={() => navigate('/signin')}>Sign In</Button>
-                            <Button id='login-button' onClick={() => navigate('/login')}>Login</Button>
+                            <Button id='signin-button' onClick={() => navigate('/login?tab=signin')}>Sign In</Button>
+                            <Button id='login-button' onClick={() => navigate('/login?tab=login')}>Login</Button>
                         </div>
                     </div>    
 
@@ -58,10 +58,12 @@ function Landing() {
                 </section>
 
                 {/* Subbar component */}
-                <Subbar />
+                <div className="subbar-section" id="subbar-section">
+                    <Subbar />
+                </div>
 
                 {/* Overview section */}
-                <section className="overview-section">
+                <section className="overview-section" id='overview-section'>
                     <p>The Fundamental changes the game of investing more than ever before for <span>anyone</span>, <span>anywhere</span> and <span>at anytime</span>. 
                         It’s simplicity leading to fast access to news, data, analytics and modern tools.</p>
                 
@@ -71,7 +73,7 @@ function Landing() {
                         <InfoCard 
                             image={worldWideCoverageIcon} 
                             title='World-Wide Coverage' 
-                            content='Access real-time data across multiple asset classes, including stocks, bonds, commodities, and cryptocurrencies.'
+                            content='Access real-time data across multiple asset classes, including stocks, indexes, commodities, and cryptocurrencies.'
                         />
 
                         {/* InfoCard with Advanced analytics */}
@@ -100,32 +102,36 @@ function Landing() {
                 </section>
 
                 {/* Products section */}
-                <section className="products-section">
+                <section className="products-section" id='products-section'>
                     <p>Fundamental offers the most powerful, flexible, and essential tools, designed for seamless and efficient use.</p>
                     
                     <div className='img_cards-container'>
                         <ImageCard 
-                            title="Markets" 
-                            image="" 
+                            title="Stocks" 
+                            image="/src/assets/img/previews/stocks-preview.png" 
+                            url="/stocks"
                         />
                         <ImageCard 
                             title="News" 
-                            image="" 
+                            image="/src/assets/img/previews/news-preview.png" 
+                            url='/news'
                         />
                         <ImageCard 
                             title="Macrocalendar" 
-                            image="" 
+                            image="/src/assets/img/previews/macrocalendar-preview.png" 
+                            url='/macrocalendar'
                         />
                         <ImageCard 
                             title="Analysis" 
                             image="" 
+                            url='/sentiment'
                         />
                     </div>
 
                 </section>
 
                 {/* Showcase section */}
-                <section className="showcase-section">
+                <section className="showcase-section" id='showcase-section'>
                     <h2>Use every single piece of Fundamental</h2>
                     <p>Highlights of Fundamental</p>
 
@@ -147,6 +153,7 @@ function Landing() {
                                     image=""
                                     width={550}
                                     height={220}
+                                    url=''
                                 />
                             </div>
 
@@ -161,6 +168,7 @@ function Landing() {
                                     image=""
                                     width={550}
                                     height={220}
+                                    url=''
                                 />
                             </div>
 
@@ -186,6 +194,7 @@ function Landing() {
                                     image=""
                                     width={550}
                                     height={220}
+                                    url=''
                                 />
                             </div>
 
@@ -196,7 +205,7 @@ function Landing() {
                 </section>
 
                 {/* Footer component */}
-                <footer>
+                <footer id='footer'>
                     <Footer />
                 </footer>
 

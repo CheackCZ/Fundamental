@@ -20,19 +20,19 @@ function Subbar() {
                     <NavigationMenuList>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Overview</NavigationMenuLink>
+                            <NavigationMenuLink href="/#overview-section">Overview</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Products</NavigationMenuLink>
+                            <NavigationMenuLink href="/#products-section">Products</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Showcase</NavigationMenuLink>
+                            <NavigationMenuLink href="/#showcase-section">Showcase</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Contact</NavigationMenuLink>
+                            <NavigationMenuLink href="/#footer">Contact</NavigationMenuLink>
                         </NavigationMenuItem>
 
                     </NavigationMenuList>

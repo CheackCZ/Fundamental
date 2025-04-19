@@ -109,18 +109,22 @@ function Dashboard() {
                         <ImageCard 
                             title="Markets" 
                             image="" 
+                            url=""
                         />
                         <ImageCard 
                             title="News" 
                             image="" 
+                            url=""
                         />
                         <ImageCard 
                             title="Macrocalendar" 
                             image="" 
+                            url=""
                         />
                         <ImageCard 
                             title="Analysis" 
                             image="" 
+                            url=""
                         />
 
                 </section>
@@ -182,7 +186,7 @@ function Dashboard() {
                 {/* Section with Macrocalendar preview */}
                 <section id="macro-section" className="main-section">
                     {/* Link to entire Macrocalendar page */}
-                    <a href="" className="section-title">Entire Macrocalendar &gt;</a>
+                    <a href="/macrocalendar" className="section-title">Entire Macrocalendar &gt;</a>
 
                     {/* Macrocalendar table component */}
                     <MacrocalendarTable />
