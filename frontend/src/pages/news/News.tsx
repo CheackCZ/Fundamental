@@ -10,6 +10,16 @@ import Command from "@/components/command/Command";
 
 import './News.css';
 
+interface NewsArticle {
+    id: string,
+    title: string;
+    description?: string;
+    url: string;
+    published_at: string;
+    source?: string;
+    image_url?: string; 
+}
+
 function News () {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
 
@@ -27,6 +37,41 @@ function News () {
 
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
+    const [stockNews, setStockNews] = useState<NewsArticle[]>([]);
+    const [economicNews, setEconomicNews] = useState<NewsArticle[]>([]);
+    const [allNews, setAllNews] = useState<NewsArticle[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);  
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const [latestRes, stockRes, econRes, allRes] = await Promise.all([
+                    fetch("http://127.0.0.1:8000/api/news/latest"),
+                    fetch("http://127.0.0.1:8000/api/news/stocks"),
+                    fetch("http://127.0.0.1:8000/api/news/economics"),
+                    fetch("http://127.0.0.1:8000/api/news/all")
+                ]);
+
+                const latestData = await latestRes.json();
+                const stockData = await stockRes.json();
+                const econData = await econRes.json();
+                const allData = await allRes.json();
+
+                setLatestNews(latestData.articles);
+                setStockNews(stockData.articles);
+                setEconomicNews(econData.articles);
+                setAllNews(allData.articles);
+            } catch (err) {
+                console.error("Error fetching news:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchNews();
     }, []);
     
 
@@ -52,47 +97,21 @@ function News () {
                         
                         <h1 className="section-title" id="latest-title">Latest News</h1>
 
+                        {/* Latest News Section */}
                         <div className="section-container" id="latest-container">
-
-                            <NewsCard 
-                                image="/src/assets/img/previews/preview-test.png"
-                                title="Wall Street's 2025 stock market forecasts are falling..."
-                                content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                newsReference="https://example.com/article"
-                                variant="detailed" 
-                                width="100%" 
-                                height="auto"
-                            />
-                            
-                            <NewsCard 
-                                image="/src/assets/img/previews/preview-test.png"
-                                title="Wall Street's 2025 stock market forecasts are falling..."
-                                content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                newsReference="https://example.com/article"
-                                variant="compact" 
-                                width="100%" 
-                                height="153px"
-                            />
-
-                            <NewsCard 
-                                image="/src/assets/img/previews/preview-test.png"
-                                title="Wall Street's 2025 stock market forecasts are falling..."
-                                content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                newsReference="https://example.com/article"
-                                variant="compact" 
-                                width="100%" 
-                                height="153px"
-                            />
-
-                            <NewsCard 
-                                image="/src/assets/img/previews/preview-test.png"
-                                title="Wall Street's 2025 stock market forecasts are falling..."
-                                content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                newsReference="https://example.com/article"
-                                variant="compact" 
-                                width="100%" 
-                                height="153px"
-                            />
+                            {latestNews.map((news, index) => (
+                                <NewsCard
+                                    key={news.id}
+                                    id={news.id}
+                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
+                                    title={news.title}
+                                    content={news.description || "No description."}
+                                    newsReference={news.url}
+                                    variant={index === 0 ? "detailed" : "compact"}
+                                    width="100%"
+                                    height={index === 0 ? "auto" : "153px"}
+                                />
+                            ))}
 
                         </div>
 
@@ -105,51 +124,23 @@ function News () {
                             Stock Market News &gt;
                         </Link>
 
-                        <div className="section-container">
-                            
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="detailed" 
-                                    width="100%" 
-                                    height="auto"
+                        <div className="section-container" id="stock-market-container">
+                            {stockNews.map((news, index) => (
+                                <NewsCard
+                                    key={news.id}
+                                    id={news.id}
+                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
+                                    title={news.title}
+                                    content={news.description || "No description."}
+                                    newsReference={news.url}
+                                    variant={index === 0 ? "detailed" : "compact"}
+                                    width="100%"
+                                    height={index === 0 ? "auto" : "153px"}
                                 />
-                                
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                            </div>
-
+                            ))}
                         </div>
+                    
+                    </div>
 
                     {/* Economic News Section */}
                     <div className="news-page-section" id="economic-market-section">
@@ -157,49 +148,22 @@ function News () {
                         <Link to="/news/economic-news" className="section-title" id="stock-market-title">
                             Economic News &gt;
                         </Link>
-                        <div className="section-container">
-                            
-                            <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="detailed" 
-                                    width="100%" 
-                                    height="auto"
-                                />
-                                
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
 
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                            </div>
+                        <div className="section-container" id="economics-container">
+                            {economicNews.map((news, index) => (
+                                    <NewsCard
+                                        key={news.id}
+                                        id={news.id}
+                                        image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
+                                        title={news.title}
+                                        content={news.description || "No description."}
+                                        newsReference={news.url}
+                                        variant={index === 0 ? "detailed" : "compact"}
+                                        width="100%"
+                                        height={index === 0 ? "auto" : "153px"}
+                                    />
+                                ))}
+                        </div>
 
                     </div>
 
@@ -209,69 +173,21 @@ function News () {
                         <h1 className="section-title" id="stock-market-title">All News</h1>
 
                         <div className="section-container">
-                            
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="auto"
+                            {allNews.map((news, index) => (
+                               <NewsCard
+                                    key={news.id}
+                                    id={news.id}
+                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
+                                    title={news.title}
+                                    content={news.description || "No description."}
+                                    newsReference={news.url}
+                                    variant={index === 0 ? "detailed" : "compact"}
+                                    width="100%"
+                                    height={index === 0 ? "auto" : "153px"}
                                 />
-                                
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="153px"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="auto"
-                                />
-
-                                <NewsCard 
-                                    image="/src/assets/img/previews/preview-test.png"
-                                    title="Wall Street's 2025 stock market forecasts are falling..."
-                                    content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                                    newsReference="https://example.com/article"
-                                    variant="compact" 
-                                    width="100%" 
-                                    height="auto"
-                                />
-
-                            </div>
+                            ))}
                         </div>
+                    </div>
 
                 </div>
                 

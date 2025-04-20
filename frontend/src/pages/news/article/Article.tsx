@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
 import NewsCard from "@/components/news-card/NewsCard";
@@ -8,141 +9,124 @@ import Footer from "@/components/footer/Footer";
 
 import './Article.css';
 
-import previewImage from "@/assets/img/previews/preview-test.png";
+interface NewsArticle {
+    id: string;
+    title: string;
+    description?: string;
+    url: string;
+    published_at: string;
+    source?: string;
+    image_url?: string;
+    content?: string;
+}
 
 const Article = () => {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
-        
-        const toggleCommand = () => {
-            setIsCommandOpen((prev) => !prev);
-        };
-        
-        useEffect(() => {
-            const handleKeyDown = (event: KeyboardEvent) => {
-                if (event.ctrlKey && event.key === "j") {
-                    event.preventDefault();
-                    toggleCommand();
-                }
-            };
-    
-            document.addEventListener("keydown", handleKeyDown);
-            return () => document.removeEventListener("keydown", handleKeyDown);
-        }, []);
+    const [article, setArticle] = useState<NewsArticle | null>(null);
+    const [relatedArticles, setRelatedArticles] = useState<NewsArticle[]>([]);
 
-    
-    const relatedNews = [
-        {
-            id: 1,
-            image: "/src/assets/img/previews/preview-test.png",
-            title: "Tech stocks drop amid AI regulations",
-            content: "The AI industry is facing regulatory changes that could impact major players...",
-            newsReference: "https://example.com/article"
-        },
-        {
-            id: 2,
-            image: "/src/assets/img/previews/preview-test.png",
-            title: "Global oil prices surge as supply chains struggle",
-            content: "Oil prices have seen a significant rise following disruptions in key supply chains...",
-            newsReference: "https://example.com/article"
-        },
-        {
-            id: 3,
-            image: "/src/assets/img/previews/preview-test.png",
-            title: "Crypto markets face turbulence amid economic uncertainty",
-            content: "Bitcoin and Ethereum dropped by 8% as investors respond to economic policy shifts...",
-            newsReference: "https://example.com/article"
-        }
-    ];
+    const { id } = useParams();
+
+    const toggleCommand = () => {
+        setIsCommandOpen((prev) => !prev);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.ctrlKey && event.key === "j") {
+                event.preventDefault();
+                toggleCommand();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    useEffect(() => {
+        if (!id) return;
+        fetch(`http://127.0.0.1:8000/api/news/article/${id}`)
+            .then(res => res.json())
+            .then(data => setArticle(data))
+            .catch(err => console.error("Failed to load article:", err));
+    }, [id]);
+
+    useEffect(() => {
+        if (!article?.title) return;
+        const encodedTitle = encodeURIComponent(article.title);
+        fetch(`http://127.0.0.1:8000/api/news/related?title=${encodedTitle}`)
+            .then(res => res.json())
+            .then(data => setRelatedArticles(data))
+            .catch(err => console.error("Failed to fetch related articles:", err));
+    }, [article]);
+
+    if (!article) return <p></p>;
 
     return (
-
         <div className="article-content">
-
             {/* Header */}
             <header>
-                <LoggedInNavbar toggleCommand={toggleCommand}/>
+                <LoggedInNavbar toggleCommand={toggleCommand} />
             </header>
-            
+
             {/* Main */}
             <main>
-
-                {/* Command Component (Search) - Opened from Navbar */}
-                {isCommandOpen && <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />}
+                {isCommandOpen && (
+                    <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
+                )}
 
                 <div className="article-container">
-
                     <div className="article-main-content">
-
                         <div className="article-preview-container">
-                            
-                            <h1>Wall Street's 2025 stock market forecasts are falling ...</h1>
-
-                            <img src={previewImage} alt="News-prev-image" />
-
+                            <h1>{article.title}</h1>
+                            <img
+                                src={article.image_url || "/src/assets/img/previews/image-preview.png"}
+                                alt="News-prev-image"
+                            />
                             <div className="sources-container">
-                                <p className="source">Source: Reuters</p>
-                                <p className="datetime">Thu, March 13, 2025 at 11:17 AM GMT+1</p>
+                                <p className="source">Source: {article.source}</p>
+                                <p className="datetime">{new Date(article.published_at).toLocaleString()}</p>
                             </div>
-                           
                         </div>
-                        
 
                         <div className="article-text-container">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam maximus posuere neque, sed egestas est aliquet non. Nunc tortor libero, vestibulum non 
-                                finibus eu, egestas eu purus. Aenean molestie at lorem sed auctor. Vivamus in egestas orci. Suspendisse egestas semper nunc in maximus. Suspendisse 
-                                potenti. In congue diam a suscipit semper. Nulla facilisi. Curabitur quis vehicula nibh, id tristique velit. Suspendisse tincidunt vehicula velit 
-                                quis congue. Sed et metus ultrices, tincidunt velit sed, ultrices tellus.</p>
-
-                            <p>Praesent ac pretium mauris. Aenean fringilla dapibus diam, non sodales arcu varius ac. Cras eu mollis turpis. Aliquam in lectus ligula. Vivamus turpis 
-                                sem, tempus a interdum eu, dictum eget mi. Vestibulum ac convallis velit, ac suscipit est. Vivamus tempus arcu quis lorem efficitur egestas. Quisque 
-                                at velit et magna fermentum posuere sed et dolor. Pellentesque id venenatis lectus. Suspendisse at turpis erat. Aenean laoreet vulputate nisi, vel 
-                                finibus quam vehicula quis. Suspendisse eu diam vel erat hendrerit bibendum eu ut arcu. Aliquam eleifend urna neque, a vulputate erat viverra nec.</p>
-
-                            <p>Ut sodales imperdiet maximus. Ut cursus ex orci, id laoreet metus pretium vitae. Mauris vehicula rutrum leo, sed congue sem consequat in. Vestibulum 
-                                faucibus lorem nunc, id vehicula felis interdum sed. Curabitur ut sem pulvinar sem laoreet condimentum. In finibus auctor ligula eget dictum. Duis nec 
-                                finibus libero, ut posuere ipsum. Duis tempus libero at sem efficitur, sed ultrices nisi ultrices. Orci varius natoque penatibus et magnis dis parturient 
-                                montes, nascetur ridiculus mus. Nulla vitae pulvinar nibh. Sed commodo auctor diam, tincidunt consectetur turpis elementum ut. Sed in iaculis quam. 
-                                Aliquam erat volutpat. Nulla venenatis tellus vel nisi imperdiet, vel cursus lacus maximus. Integer non luctus tortor. Phasellus vulputate gravida 
-                                consectetur.</p>
-
-                            <p>Nullam vulputate vitae tortor vitae laoreet. Maecenas pharetra eros nisi, ut finibus diam semper nec. Nunc sit amet sem sed tellus dapibus dapibus. 
-                                Etiam hendrerit, enim in fermentum scelerisque, nulla nunc convallis ante, eget ultrices orci ligula sed erat. Sed iaculis magna vel mauris gravida 
-                                pharetra. Etiam fermentum orci enim, at tristique tellus bibendum in. Proin vel arcu non nisl imperdiet mattis non vitae tellus. Morbi ut justo sed 
-                                risus porta consectetur ut non dolor. Nunc ultricies, erat et placerat finibus, leo tortor ornare felis, vel fringilla dolor diam eu odio. Praesent et 
-                                lacus tempus, tincidunt arcu ut, mattis elit. Donec sit amet ex vel dui tristique aliquet non quis arcu. Vivamus ultrices neque sed diam imperdiet, 
-                                vitae gravida nunc aliquam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam varius purus tincidunt, 
-                                mollis nunc quis, vehicula ipsum. Fusce dignissim tellus turpis, vel facilisis dui vehicula a.</p>
-
+                            {article.content ? (
+                                article.content.split("\n").map((paragraph, index) => (
+                                    <p key={index}>{paragraph}</p>
+                                ))
+                            ) : (
+                                <p>⚠️ Article content could not be displayed.</p>
+                            )}
                         </div>
                     </div>
 
                     <div className="related-news-container">
                         <h2 className="related-news-title">Related News</h2>
-                        {relatedNews.map((news) => (
-                            <NewsCard
-                                key={news.id}
-                                image={news.image}
-                                title={news.title}
-                                content={news.content}
-                                newsReference={news.newsReference}
-                                variant="compact"
-                                width="100%"
-                                height="153px"
-                            />
-                        ))}
+                        {relatedArticles.length === 0 ? (
+                            <p>No related articles found.</p>
+                        ) : (
+                            relatedArticles.map((news) => (
+                                <NewsCard
+                                    id={news.id}
+                                    key={news.id}
+                                    image={news.image_url || "/src/assets/img/previews/image-preview.png"}
+                                    title={news.title}
+                                    content={news.description || news.content?.slice(0, 100) + "..."}
+                                    newsReference={news.url}
+                                    variant="compact"
+                                    width="100%"
+                                    height="153px"
+                                />
+                            ))
+                        )}
                     </div>
-
                 </div>
-
             </main>
 
             {/* Footer */}
             <footer>
                 <Footer />
             </footer>
-
         </div>
-
     );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     Card,
     CardContent,
@@ -10,6 +11,7 @@ import {
 import "./NewsCard.css";
 
 interface NewsCardProps {
+    id?:string,
     image?: string;
     title?: string;
     content?: string;
@@ -21,6 +23,7 @@ interface NewsCardProps {
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({
+    id = "",
     image = "",
     title = "",
     content = "",
@@ -68,11 +71,18 @@ const NewsCard: React.FC<NewsCardProps> = ({
                 </>
             ) : variant === "compact" ? (
                 <>
-                    <img src={image} alt={title} className="news-item-img" />
+                    <img
+                        src={image}
+                        alt={title}
+                        className="news-item-img"
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "/src/assets/img/previews/image-preview.png";
+                        }}
+                    />
                     <div className="news-item-texts">
                         <CardTitle className="news-item-title">{title}</CardTitle>
                         <p className="news-item-text">{content}</p>
-                        <a href={newsReference}>More &gt;</a>
+                        <Link to={`/news/article/${id}`}>More &gt;</Link>
                     </div>
                 </>
             ) : (
@@ -87,7 +97,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
                     </CardContent>
 
                     <CardFooter className="news-card-footer">
-                        <a href={newsReference}>More &gt;</a>
+                        <Link to={`/news/article/${id}`}>More &gt;</Link>
                     </CardFooter>
                 </>
             )}

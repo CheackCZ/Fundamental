@@ -41,7 +41,7 @@ function App() {
                 <Route path="/news/:sectionName" element={<NewsSection />} />
 
                 {/* Route to inidividual news */}
-                <Route path="/news/article/:newsId" element={<Article />} />
+                <Route path="/news/article/:id" element={<Article />} />
 
                 {/* Route to Macrocalendar */}
                 <Route path="/macrocalendar" element={<Macrocalendar />}></Route>

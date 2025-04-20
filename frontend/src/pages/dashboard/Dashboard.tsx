@@ -22,6 +22,17 @@ function Dashboard() {
     const [isDeleting, setIsDeleting] = useState<boolean>(false);
     const [typingSpeed, setTypingSpeed] = useState<number>(100);
 
+    interface NewsArticle {
+        id: string;
+        title: string;
+        description?: string;
+        url: string;
+        published_at: string;
+        source?: string;
+        image_url?: string;
+        content?: string;
+    }
+
     const placeholderOptions = [
         "Search for stocks...",
         "Try 'Tesla stock price'...",
@@ -72,6 +83,18 @@ function Dashboard() {
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, []);
+
+    const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/news/latest")
+            .then(res => res.json())
+            .then(data => {
+                setLatestNews(data.articles.slice(0, 3)); // Load only 3
+            })
+            .catch(err => console.error("Failed to load latest news:", err));
+    }, []);
+
 
     return (
         <div className="dashboard-content">
@@ -134,38 +157,23 @@ function Dashboard() {
                     {/* Link to enitre News page */}
                     <a href="/news" className="section-title">All news &gt;</a>
 
-                    {/* Container with individual news preview */}
                     <div className="news-boxes-container">
-                        <NewsCard 
-                            image="/src/assets/img/previews/preview-test.png"
-                            title="Wall Street's 2025 stock market forecasts are falling..."
-                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                            newsReference="https://example.com/article"
-                            variant="default" 
-                            width="100%" 
-                            height="480px"
-                        />
-
-                        <NewsCard 
-                            image="/src/assets/img/previews/preview-test.png"
-                            title="Wall Street's 2025 stock market forecasts are falling..."
-                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                            newsReference="https://example.com/article"
-                            variant="default" 
-                            width="100%" 
-                            height="520px"
-                        />
-
-                        <NewsCard 
-                            image="/src/assets/img/previews/preview-test.png"
-                            title="Wall Street's 2025 stock market forecasts are falling..."
-                            content="Monday's skdvnsja  kajdhsfhas hfbjkdfaskdf jas nfjs fs ndfkjna ehfadsfjanef unasdssdfjsk  ajsnf asfsjadf naj ndnfksankfd nasdjasndajsn da sdnj ansd jandaa  akd aj a dnaj fn rsfndna  asdn ajns dakjsn dmarket meltdown coincided with a major shift in how Wall Street is thinking about the health of the US economy..."
-                            newsReference="https://example.com/article"
-                            variant="default" 
-                            width="100%" 
-                            height="480px"
-                        />
-
+                        {latestNews.length === 0 ? (
+                            <p>Loading latest news...</p>
+                        ) : (
+                            latestNews.map((news, index) => (
+                                <NewsCard
+                                    key={news.id}
+                                    id={news.id}
+                                    image={news.image_url || "/src/assets/img/previews/image-preview.png"}
+                                    title={news.title}
+                                    content={news.description || news.content?.slice(0, 100) + "..."}
+                                    variant="default"
+                                    width="100%"
+                                    height={index === 1 ? "520px" : "480px"}
+                                />
+                            ))
+                        )}
                     </div>
                     
                 </section>
