@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
 import NewsCard from "@/components/news-card/NewsCard";
+// @ts-ignore
+import Command from "@/components/command/Command"; 
 import Footer from "@/components/footer/Footer";
 
 import './Article.css';
@@ -63,6 +65,9 @@ const Article = () => {
             
             {/* Main */}
             <main>
+
+                {/* Command Component (Search) - Opened from Navbar */}
+                {isCommandOpen && <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />}
 
                 <div className="article-container">
 

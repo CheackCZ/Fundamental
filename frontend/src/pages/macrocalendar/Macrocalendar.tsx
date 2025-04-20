@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
+// @ts-ignore
+import Command from "@/components/command/Command"; 
 import Footer from "@/components/footer/Footer";
 import MacrocalendarTable from "@/components/macrocalendar-table/MacroCalendarTable";
 
@@ -48,6 +50,10 @@ function Macrocalendar() {
 
             {/* Main */}
             <main className="macrocalendar-main">
+                
+                {/* Command Component (Search) - Opened from Navbar */}
+                {isCommandOpen && <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />}
+                
                 <section className="calendar-section">
                     <h2 className="section-title">Select Week</h2>
 

@@ -6,6 +6,7 @@ import Navbar from '@/components/navbar/Navbar';
 import Subbar from '@/components/subbar/Subbar';
 import InfoCard from '@/components/info-card/InfoCard';
 import ImageCard from '@/components/img-card/ImageCard';
+import VideoCard from '@/components/video-card/VideoCard';
 import Footer from '@/components/footer/Footer';
 
 import phoneImage from '@/assets/img/phone.png';
@@ -123,7 +124,7 @@ function Landing() {
                         />
                         <ImageCard 
                             title="Analysis" 
-                            image="" 
+                            image="/src/assets/img/previews/analysis-preview.png" 
                             url='/sentiment'
                         />
                     </div>
@@ -148,12 +149,10 @@ function Landing() {
                             </div>
 
                             <div className="image-part">
-                                <ImageCard 
-                                    title="Research" 
-                                    image=""
+                                <VideoCard
+                                    video="/src/assets/video/motions/analysis-motion.mp4"
                                     width={550}
                                     height={220}
-                                    url=''
                                 />
                             </div>
 
@@ -163,12 +162,10 @@ function Landing() {
                         <div className="showcase-box">
 
                             <div className="image-part" id='left'>
-                                <ImageCard 
-                                    title="Research" 
-                                    image=""
+                                <VideoCard 
+                                    video="/src/assets/video/motions/news-motion.mp4"
                                     width={550}
                                     height={220}
-                                    url=''
                                 />
                             </div>
 
@@ -189,12 +186,10 @@ function Landing() {
                             </div>
 
                             <div className="image-part">
-                                <ImageCard 
-                                    title="Research" 
-                                    image=""
+                                <VideoCard 
+                                    video="/src/assets/video/motions/stock-motion.mp4"
                                     width={550}
                                     height={220}
-                                    url=''
                                 />
                             </div>
 

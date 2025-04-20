@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 
 import StockCard from "@/components/stock-card/StockCard";
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
+// @ts-ignore
+import Command from "@/components/command/Command"; 
 import Footer from "@/components/footer/Footer";
 
 import './Stocks.css'
@@ -128,6 +130,10 @@ export default function Stocks() {
         
             {/* Main */}
             <main>
+                
+                {/* Command Component (Search) - Opened from Navbar */}
+                {isCommandOpen && <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />}
+
                 <div className="stocks-container">
                     <h1 className="text-3xl font-bold mb-6">Stocks</h1>
                     <Input

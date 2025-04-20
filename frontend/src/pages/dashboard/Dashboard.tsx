@@ -7,13 +7,13 @@ import ImageCard from '@/components/img-card/ImageCard';
 import NewsCard from "@/components/news-card/NewsCard";
 import MarketsCarousel from "@/components/markets-carousel/MarketsCarousel";
 import MacrocalendarTable from "@/components/macrocalendar-table/MacroCalendarTable";
+import FearGreedBox from "@/components/sentiment/FearAndGreed";
 import Footer from "@/components/footer/Footer";
 
 // @ts-ignore
 import Command from "@/components/command/Command"; 
 
 import "./Dashboard.css";
-import FearAndGreed from "@/components/fear-and-greed/FearAndGreed";
 
 function Dashboard() {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
@@ -107,24 +107,24 @@ function Dashboard() {
                 <section id="boxes-section" className="main-section">
 
                         <ImageCard 
-                            title="Markets" 
-                            image="" 
-                            url=""
+                            title="Stocks" 
+                            image="/src/assets/img/previews/stocks-preview.png" 
+                            url="/stocks"
                         />
                         <ImageCard 
                             title="News" 
-                            image="" 
-                            url=""
+                            image="/src/assets/img/previews/news-preview.png" 
+                            url='/news'
                         />
                         <ImageCard 
                             title="Macrocalendar" 
-                            image="" 
-                            url=""
+                            image="/src/assets/img/previews/macrocalendar-preview.png" 
+                            url='/macrocalendar'
                         />
                         <ImageCard 
                             title="Analysis" 
-                            image="" 
-                            url=""
+                            image="/src/assets/img/previews/analysis-preview.png" 
+                            url='/sentiment'
                         />
 
                 </section>
@@ -132,7 +132,7 @@ function Dashboard() {
                 {/* Section with News previews */}
                 <section id="news-section" className="main-section">
                     {/* Link to enitre News page */}
-                    <a href="" className="section-title">All news &gt;</a>
+                    <a href="/news" className="section-title">All news &gt;</a>
 
                     {/* Container with individual news preview */}
                     <div className="news-boxes-container">
@@ -173,7 +173,7 @@ function Dashboard() {
                 {/* Section with Markets preview */}
                 <section id="markets-section" className="main-section">
                     {/* Link to entire Markets page */}
-                    <a href="" className="section-title">All Markets &gt;</a>
+                    <a href="/stocks" className="section-title">All Markets &gt;</a>
 
                     {/* Carousel with the markets */}
                     <div className="markets-carousel">
@@ -197,10 +197,10 @@ function Dashboard() {
                 <section id="analysis-section" className="main-section">
 
                     {/* Link to entire Analysis page */}
-                    <a href="" className="section-title">Analysis &gt;</a>
+                    <a href="/sentiment" className="section-title">Analysis &gt;</a>
                     
                     {/* Stock Market Fear & Greed Index */}
-                    <FearAndGreed />
+                    <FearGreedBox indexValue={21} level="Greed" />
 
                 </section>
 

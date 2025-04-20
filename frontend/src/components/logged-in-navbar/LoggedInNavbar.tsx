@@ -33,15 +33,23 @@ function LoggedInNavbar({ toggleCommand }: LoggedInNavbarProps) {
                     <NavigationMenuList>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Dashboard</NavigationMenuLink>
+                            <NavigationMenuLink href="/dashboard">Dashboard</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>Markets</NavigationMenuLink>
+                            <NavigationMenuLink href="/stocks">Stocks</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <NavigationMenuLink>News</NavigationMenuLink>
+                            <NavigationMenuLink href="/news">News</NavigationMenuLink>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <NavigationMenuLink href="/macrocalendar">Macrocalendar</NavigationMenuLink>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <NavigationMenuLink href="/sentiment">Analysis</NavigationMenuLink>
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
