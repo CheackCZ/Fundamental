@@ -144,3 +144,13 @@ def get_related_articles(title: str):
     ]
 
     return related[:3]
+
+
+@router.get("/news/ticker/{ticker}", response_model=NewsResponse)
+def get_news_by_ticker(ticker: str):
+    """
+    Fetches news related to a specific stock ticker (e.g., AAPL, TSLA).
+    """
+    query = f"{ticker} stock"
+    articles = fetch_news(query, limit=6)
+    return NewsResponse(category=ticker.upper(), articles=articles)

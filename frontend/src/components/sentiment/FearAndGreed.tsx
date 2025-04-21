@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -9,14 +9,42 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const FearGreedBox = ({
-    indexValue,
-    loading = false,
-}: {
-    indexValue: number;
-    level: string;
-    loading?: boolean;
-}) => {
+type FearGreedData = {
+    current_value: string;
+    historical_values: string[];
+};
+
+const FearGreedBox = () => {
+    const [data, setData] = useState<FearGreedData | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch("http://127.0.0.1:8000/api/analysis/fear-greed");
+                const json = await res.json();
+    
+                setData({
+                    current_value: json.current_value,
+                    historical_values: json.historical_values,
+                });
+            } catch (err) {
+                console.error("Error fetching Fear & Greed data:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchData();
+    }, []);
+    
+
+    const indexValue = data ? parseInt(data.current_value) : 0;
+
+    const historicalValues = data
+        ? data.historical_values.map((v) => parseInt(v))
+        : [];
+
     const getTickPosition = (value: number) => {
         const angle = (value / 100) * 180 - 180;
         const r = 120;
@@ -30,12 +58,20 @@ const FearGreedBox = ({
 
     const { cx, cy, x2, y2 } = getTickPosition(indexValue);
 
-    const historyItems = [
-        { label: "Previous close", value: 20, sentiment: "Extreme Fear" },
-        { label: "1 week ago", value: 19, sentiment: "Extreme Fear" },
-        { label: "1 month ago", value: 22, sentiment: "Extreme Fear" },
-        { label: "1 year ago", value: 30, sentiment: "Fear" },
-    ];
+    const labels = ["Previous close", "1 week ago", "1 month ago", "1 year ago"];
+
+    const getSentiment = (value: number): string => {
+        if (value >= 75) return "Extreme Greed";
+        if (value >= 50) return "Greed";
+        if (value >= 25) return "Fear";
+        return "Extreme Fear";
+    };
+
+    const historyItems = historicalValues.map((value, index) => ({
+        label: labels[index],
+        value,
+        sentiment: getSentiment(value),
+    }));
 
     const getColorClass = (value: number) => {
         if (value >= 75) return "border-green-500 text-green-600";
@@ -75,17 +111,9 @@ const FearGreedBox = ({
                                     <polygon
                                         points={(() => {
                                             const baseLength = 20;
-                                            const angle = Math.atan2(
-                                                y2 - cy,
-                                                x2 - cx
-                                            );
-                                            const dx =
-                                                (Math.sin(angle) * baseLength) /
-                                                2;
-                                            const dy =
-                                                (-Math.cos(angle) *
-                                                    baseLength) /
-                                                2;
+                                            const angle = Math.atan2(y2 - cy, x2 - cx);
+                                            const dx = (Math.sin(angle) * baseLength) / 2;
+                                            const dy = (-Math.cos(angle) * baseLength) / 2;
                                             const x1 = cx + dx;
                                             const y1 = cy + dy;
                                             const x3 = cx - dx;
@@ -94,18 +122,8 @@ const FearGreedBox = ({
                                         })()}
                                         fill="black"
                                     />
-                                    <circle
-                                        cx={cx}
-                                        cy={cy}
-                                        r={10}
-                                        fill="black"
-                                    />
-                                    <circle
-                                        cx={cx}
-                                        cy={cy}
-                                        r={35}
-                                        fill="white"
-                                    />
+                                    <circle cx={cx} cy={cy} r={10} fill="black" />
+                                    <circle cx={cx} cy={cy} r={35} fill="white" />
                                     <text
                                         x={cx}
                                         y={cy + 10}
@@ -154,12 +172,11 @@ const FearGreedBox = ({
                                       </div>
                                   )
                               )}
-
                         {loading ? (
                             <Skeleton className="w-[220px] h-4 mt-2 rounded-sm" />
                         ) : (
                             <div className="text-xs text-gray-500 mt-2">
-                                Last updated Apr 17 at 8:59:51 PM ET
+                                Last updated just now
                             </div>
                         )}
                     </div>
@@ -169,14 +186,12 @@ const FearGreedBox = ({
                 <div className="fng-description mt-6 px-4 md:px-6">
                     {loading ? (
                         <div className="w-full space-y-3">
-                            <Skeleton className="h-6 w-3/4 rounded-sm" />
-                            <Skeleton className="h-16 w-full rounded-md" />
-                            <Skeleton className="h-6 w-2/3 rounded-sm mt-4" />
-                            <Skeleton className="h-20 w-full rounded-md" />
-                            <Skeleton className="h-6 w-2/4 rounded-sm mt-4" />
-                            <Skeleton className="h-16 w-full rounded-md" />
-                            <Skeleton className="h-6 w-2/3 rounded-sm mt-4" />
-                            <Skeleton className="h-16 w-full rounded-md" />
+                            {Array.from({ length: 8 }).map((_, i) => (
+                                <Skeleton
+                                    key={i}
+                                    className={`h-${i % 2 === 0 ? "6" : "16"} w-${i % 2 === 0 ? "2/3" : "full"} rounded-sm`}
+                                />
+                            ))}
                         </div>
                     ) : (
                         <Accordion
@@ -199,20 +214,16 @@ const FearGreedBox = ({
                                 </AccordionTrigger>
                                 <AccordionContent className="text-black p-2">
                                     The Fear & Greed Index is a compilation of seven different indicators that measure some aspect of stock market behavior. 
-                                    They are market momentum, stock price strength, stock price breadth, put and call options, junk bond demand, market volatility, and safe haven 
-                                    demand. The index tracks how much these individual indicators deviate from their averages compared to how much they normally diverge. The index 
-                                    gives each indicator equal weighting in calculating a score from 0 to 100, with 100 representing maximum greediness and 0 signaling maximum fear.
+                                    The index gives each indicator equal weighting in calculating a score from 0 to 100.
                                 </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="frequency">
                                 <AccordionTrigger>
-                                    How often is the Fear & Greed Index
-                                    calculated?
+                                    How often is the Fear & Greed Index calculated?
                                 </AccordionTrigger>
                                 <AccordionContent className="text-black p-2">
-                                    Every component and the Index are calculated
-                                    as soon as new data becomes available.
+                                    Every component and the Index are calculated as soon as new data becomes available.
                                 </AccordionContent>
                             </AccordionItem>
 
@@ -221,9 +232,7 @@ const FearGreedBox = ({
                                     How to use Fear & Greed Index?
                                 </AccordionTrigger>
                                 <AccordionContent className="text-black p-2">
-                                    The Fear & Greed Index is used to gauge the mood of the market. Many investors are emotional and reactionary, and fear and greed 
-                                    sentiment indicators can alert investors to their own emotions and biases that can influence their decisions. When combined with fundamentals 
-                                    and other analytical tools, the Index can be a helpful way to assess market sentiment.
+                                    The Index can help assess market sentiment and avoid emotional investing decisions.
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>

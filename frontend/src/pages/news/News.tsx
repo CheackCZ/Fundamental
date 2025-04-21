@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
 import NewsCard from "@/components/news-card/NewsCard";
 import Footer from "@/components/footer/Footer";
 
 // @ts-ignore
-import Command from "@/components/command/Command"; 
+import Command from "@/components/command/Command";
 
 import './News.css';
 
@@ -17,16 +17,16 @@ interface NewsArticle {
     url: string;
     published_at: string;
     source?: string;
-    image_url?: string; 
+    image_url?: string;
 }
 
-function News () {
+function News() {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
 
     const toggleCommand = () => {
         setIsCommandOpen((prev) => !prev);
     };
-    
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.ctrlKey && event.key === "j") {
@@ -43,7 +43,7 @@ function News () {
     const [stockNews, setStockNews] = useState<NewsArticle[]>([]);
     const [economicNews, setEconomicNews] = useState<NewsArticle[]>([]);
     const [allNews, setAllNews] = useState<NewsArticle[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);  
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -73,134 +73,83 @@ function News () {
 
         fetchNews();
     }, []);
-    
+
+    const renderNewsSection = (
+        title: string,
+        link: string | null,
+        newsList: NewsArticle[],
+        id: string
+    ) => (
+        <div className="news-page-section" id={id}>
+            {link ? (
+                <Link to={link} className="section-title">{title} &gt;</Link>
+            ) : (
+                <h1 className="section-title">{title}</h1>
+            )}
+
+            <div className="section-container">
+                {loading
+                    ? Array.from({ length: 4 }).map((_, index) => (
+                          <NewsCard
+                              key={index}
+                              loading={true}
+                              variant={index === 0 ? "detailed" : "compact"}
+                              width="100%"
+                              height={index === 0 ? "auto" : "153px"}
+                          />
+                      ))
+                    : newsList.map((news, index) => (
+                          <NewsCard
+                              key={news.id}
+                              id={news.id}
+                              image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
+                              title={news.title}
+                              content={news.description || "No description."}
+                              newsReference={news.url}
+                              variant={index === 0 ? "detailed" : "compact"}
+                              width="100%"
+                              height={index === 0 ? "auto" : "153px"}
+                          />
+                      ))}
+            </div>
+        </div>
+    );
 
     return (
-
         <div className="news-content">
-            
-            {/* Header */}
-            <header>
-                <LoggedInNavbar toggleCommand={toggleCommand}/>
-            </header>
-        
-            {/* Main */}
-            <main>
 
-                {/* Command Component (Search) - Opened from Navbar */}
-                {isCommandOpen && <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />}
+            <header>
+                <LoggedInNavbar toggleCommand={toggleCommand} />
+            </header>
+
+            <main>
+                {isCommandOpen && (
+                    <Command isVisible={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
+                )}
 
                 <div className="news-page-sections">
 
                     {/* Latest News Section */}
-                    <div className="news-page-section" id="latest-section">
-                        
-                        <h1 className="section-title" id="latest-title">Latest News</h1>
+                    {renderNewsSection("Latest News", null, latestNews, "latest-section")}
 
-                        {/* Latest News Section */}
-                        <div className="section-container" id="latest-container">
-                            {latestNews.map((news, index) => (
-                                <NewsCard
-                                    key={news.id}
-                                    id={news.id}
-                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
-                                    title={news.title}
-                                    content={news.description || "No description."}
-                                    newsReference={news.url}
-                                    variant={index === 0 ? "detailed" : "compact"}
-                                    width="100%"
-                                    height={index === 0 ? "auto" : "153px"}
-                                />
-                            ))}
-
-                        </div>
-
-                    </div>
-
-                    {/* Stock market News Section */}
-                    <div className="news-page-section" id="stock-market-section">
-
-                        <Link to="/news/stock-market-news" className="section-title" id="stock-market-title">
-                            Stock Market News &gt;
-                        </Link>
-
-                        <div className="section-container" id="stock-market-container">
-                            {stockNews.map((news, index) => (
-                                <NewsCard
-                                    key={news.id}
-                                    id={news.id}
-                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
-                                    title={news.title}
-                                    content={news.description || "No description."}
-                                    newsReference={news.url}
-                                    variant={index === 0 ? "detailed" : "compact"}
-                                    width="100%"
-                                    height={index === 0 ? "auto" : "153px"}
-                                />
-                            ))}
-                        </div>
-                    
-                    </div>
+                    {/* Stock Market News Section */}
+                    {renderNewsSection("Stock Market News", "/news/stock-market-news", stockNews, "stock-market-section")}
 
                     {/* Economic News Section */}
-                    <div className="news-page-section" id="economic-market-section">
-                        
-                        <Link to="/news/economic-news" className="section-title" id="stock-market-title">
-                            Economic News &gt;
-                        </Link>
-
-                        <div className="section-container" id="economics-container">
-                            {economicNews.map((news, index) => (
-                                    <NewsCard
-                                        key={news.id}
-                                        id={news.id}
-                                        image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
-                                        title={news.title}
-                                        content={news.description || "No description."}
-                                        newsReference={news.url}
-                                        variant={index === 0 ? "detailed" : "compact"}
-                                        width="100%"
-                                        height={index === 0 ? "auto" : "153px"}
-                                    />
-                                ))}
-                        </div>
-
-                    </div>
+                    {renderNewsSection("Economic News", "/news/economic-news", economicNews, "economic-market-section")}
 
                     {/* All News Section */}
-                    <div className="news-page-section" id="all-section">
-                        
-                        <h1 className="section-title" id="stock-market-title">All News</h1>
-
-                        <div className="section-container">
-                            {allNews.map((news, index) => (
-                               <NewsCard
-                                    key={news.id}
-                                    id={news.id}
-                                    image={news.image_url || "/src/assets/img/previews/image-preview.jpg"}
-                                    title={news.title}
-                                    content={news.description || "No description."}
-                                    newsReference={news.url}
-                                    variant={index === 0 ? "detailed" : "compact"}
-                                    width="100%"
-                                    height={index === 0 ? "auto" : "153px"}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    {renderNewsSection("All News", null, allNews, "all-section")}
 
                 </div>
-                
             </main>
 
             <footer>
-                <Footer></Footer>
+                <Footer />
             </footer>
 
         </div>
-
-    )
-    
+    );
 }
 
 export default News;

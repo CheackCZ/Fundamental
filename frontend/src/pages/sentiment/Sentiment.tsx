@@ -12,8 +12,6 @@ import './Sentiment.css'
 
 function Sentiment() {
     const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
-    const [vixData, setVixData] = useState([]);
-    const [vixValue, setVixValue] = useState<number | null>(null);
 
     const toggleCommand = () => {
         setIsCommandOpen((prev) => !prev);
@@ -29,15 +27,6 @@ function Sentiment() {
 
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
-    }, []);
-
-    useEffect(() => {
-        fetch("/api/market/vix")
-            .then((res) => res.json())
-            .then((data) => {
-                setVixData(data.history);
-                setVixValue(data.current);
-            });
     }, []);
 
     return (
@@ -58,7 +47,7 @@ function Sentiment() {
                 <h1 className="section-title" id="latest-title">Current Market Mood</h1>
                 
                 <div className="flex items-start w-full">
-                    <FearGreedBox indexValue={21} level="Greed" />
+                    <FearGreedBox />
                 </div>
 
                 <div className="flex items-start w-full">

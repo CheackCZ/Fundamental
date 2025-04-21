@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Input } from "@/components/ui/input";
 
 import LoggedInNavbar from "@/components/logged-in-navbar/LoggedInNavbar";
 import ImageCard from '@/components/img-card/ImageCard';
 import NewsCard from "@/components/news-card/NewsCard";
-import MarketsCarousel from "@/components/markets-carousel/MarketsCarousel";
+import StocksCarousel from "@/components/markets-carousel/MarketsCarousel";
 import MacrocalendarTable from "@/components/macrocalendar-table/MacroCalendarTable";
 import FearGreedBox from "@/components/sentiment/FearAndGreed";
 import Footer from "@/components/footer/Footer";
@@ -35,12 +36,18 @@ function Dashboard() {
 
     const placeholderOptions = [
         "Search for stocks...",
-        "Try 'Tesla stock price'...",
-        "Look up financial news...",
-        "Find market trends...",
-        "Search for economic data...",
-        "Try 'AAPL earnings'..."
+        "Try 'Tesla ticker'...",
+        "Try 'AAPL'..."
     ];
+
+    const navigate = useNavigate();
+    const [search, setSearch] = useState<string>("");
+    const [suggestions, setSuggestions] = useState<StockData[]>([]);
+
+    interface StockData {
+        ticker: string;
+        name: string;
+    }
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -90,10 +97,26 @@ function Dashboard() {
         fetch("http://127.0.0.1:8000/api/news/latest")
             .then(res => res.json())
             .then(data => {
-                setLatestNews(data.articles.slice(0, 3)); // Load only 3
+                setLatestNews(data.articles.slice(0, 3));
             })
             .catch(err => console.error("Failed to load latest news:", err));
     }, []);
+
+    useEffect(() => {
+        if (search.length < 1) {
+            setSuggestions([]);
+            return;
+        }
+    
+        const delayDebounce = setTimeout(() => {
+            fetch(`http://localhost:8000/api/stocks/search?query=${search}`)
+                .then((res) => res.json())
+                .then((data) => setSuggestions(data))
+                .catch(() => setSuggestions([]));
+        }, 300);
+    
+        return () => clearTimeout(delayDebounce);
+    }, [search]);
 
 
     return (
@@ -118,7 +141,31 @@ function Dashboard() {
                         <h1>Welcome, ondra.faltin@gmail.com</h1>
                         <p>Press CTRL + J or search for anything you need.</p>
 
-                        <Input className="text-white" placeholder={placeholder} />
+                        <div className="relative w-full max-w-md">
+                            <Input
+                                className="text-white w-full"
+                                placeholder={placeholder}
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                            {suggestions.length > 0 && (
+                                <ul className="absolute top-full mt-1 w-full border rounded bg-white shadow-md z-10 max-h-60 overflow-y-auto text-black">
+                                    {suggestions.slice(0, 5).map((s) => (
+                                        <li
+                                            key={s.ticker}
+                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                            onClick={() => {
+                                                setSearch(s.ticker);
+                                                navigate(`/stock/${s.ticker}`);
+                                            }}
+                                        >
+                                            {s.ticker} - {s.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+
                     </div>
 
                     {/* Container with some visualization, not yet added. */}
@@ -158,22 +205,27 @@ function Dashboard() {
                     <a href="/news" className="section-title">All news &gt;</a>
 
                     <div className="news-boxes-container">
-                        {latestNews.length === 0 ? (
-                            <p>Loading latest news...</p>
-                        ) : (
-                            latestNews.map((news, index) => (
-                                <NewsCard
-                                    key={news.id}
-                                    id={news.id}
-                                    image={news.image_url || "/src/assets/img/previews/image-preview.png"}
-                                    title={news.title}
-                                    content={news.description || news.content?.slice(0, 100) + "..."}
-                                    variant="default"
-                                    width="100%"
-                                    height={index === 1 ? "520px" : "480px"}
-                                />
-                            ))
-                        )}
+                    {latestNews.length === 0 ? (
+                        <>
+                            <NewsCard loading variant="default" width="100%" height="480px" />
+                            <NewsCard loading variant="default" width="100%" height="520px" />
+                            <NewsCard loading variant="default" width="100%" height="480px" />
+                        </>
+                    ) : (
+                        latestNews.map((news, index) => (
+                            <NewsCard
+                                key={news.id}
+                                id={news.id}
+                                image={news.image_url || "/src/assets/img/previews/image-preview.png"}
+                                title={news.title}
+                                content={news.description || news.content?.slice(0, 100) + "..."}
+                                variant="default"
+                                width="100%"
+                                height={index === 1 ? "520px" : "480px"}
+                            />
+                        ))
+                    )}
+
                     </div>
                     
                 </section>
@@ -185,7 +237,7 @@ function Dashboard() {
 
                     {/* Carousel with the markets */}
                     <div className="markets-carousel">
-                        <MarketsCarousel />
+                        <StocksCarousel />
                     </div>
 
                 </section>
@@ -208,8 +260,7 @@ function Dashboard() {
                     <a href="/sentiment" className="section-title">Analysis &gt;</a>
                     
                     {/* Stock Market Fear & Greed Index */}
-                    <FearGreedBox indexValue={21} level="Greed" />
-
+                    <FearGreedBox />
                 </section>
 
             </main>

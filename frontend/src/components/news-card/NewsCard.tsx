@@ -31,7 +31,7 @@ const NewsCard: React.FC<NewsCardProps> = ({
     variant = "default",
     width,
     height,
-    loading = false,
+    loading,
 }) => {
     const baseClass =
         variant === "detailed"
