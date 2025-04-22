@@ -23,7 +23,7 @@ function Footer () {
                         </div>
 
                         <div className="footer-contact-values">
-                            <a href="mailto: fundamental@ondrejfaltin.cz" target="_blank">fundamental@ondrejfaltin.cz</a>
+                            <a href="mailto: ondra.faltin@gmail.com" target="_blank">ondra.faltin@gmail.com</a>
                         
                             <ul>
                                 <li><a href="https://www.linkedin.com/in/ond%C5%99ej-faltin-0522a1300/" target="_blank">Linkedin</a></li>

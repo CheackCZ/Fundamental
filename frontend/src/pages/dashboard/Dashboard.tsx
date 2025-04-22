@@ -138,7 +138,7 @@ function Dashboard() {
 
                     {/* Container with welcome message, instruction and input box. */}
                     <div className="info-container">
-                        <h1>Welcome, ondra.faltin@gmail.com</h1>
+                        <h1>Welcome to Fundamental!</h1>
                         <p>Press CTRL + J or search for anything you need.</p>
 
                         <div className="relative w-full max-w-md">
