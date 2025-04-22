@@ -233,7 +233,7 @@ function Dashboard() {
                 {/* Section with Markets preview */}
                 <section id="markets-section" className="main-section">
                     {/* Link to entire Markets page */}
-                    <a href="/stocks" className="section-title">All Markets &gt;</a>
+                    <a href="/stocks" className="section-title">All Stocks &gt;</a>
 
                     {/* Carousel with the markets */}
                     <div className="markets-carousel">

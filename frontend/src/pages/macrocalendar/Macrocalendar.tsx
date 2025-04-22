@@ -59,8 +59,8 @@ function Macrocalendar() {
 
                     <Calendar
                         mode="single"
-                        onSelect={setSelectedDate}
-                        className="calendar rounded-md border shadow bg-black text-white"
+                        onSelect={() => {}}
+                        className="calendar rounded-md border shadow bg-black text-white pointer-events-none select-none"
                         weekStartsOn={1}
                         showOutsideDays={false}
                         modifiers={{

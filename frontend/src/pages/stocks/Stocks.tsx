@@ -122,15 +122,16 @@ export default function Stocks() {
 
                     <h3>Hottest Stocks</h3>
 
-                    {isLoading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                            {stocks.map((stock) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        {isLoading
+                            ? Array.from({ length: 10 }).map((_, i) => (
+                                <StockCard key={`skeleton-${i}`} skeleton />
+                            ))
+                            : stocks.map((stock) => (
                                 <StockCard key={stock.ticker} stock={stock} />
                             ))}
-                        </div>
-                    )}
+                    </div>
+
                 </div>
             </main>
 
